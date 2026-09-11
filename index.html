@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plankshell & Energy — Complete Corporate Web Application</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Manrope', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f8f9ff',
+              100: '#eff4ff',
+              200: '#cbdbf5',
+              700: '#2b4770',
+              800: '#1b2f4c',
+              900: '#0f172a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom clean scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    /* Submenu hover bridge to avoid dead zones */
+    .dropdown-parent:hover .dropdown-menu {
+      display: block;
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="bg-[#f8f9ff] text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-purple-100 selection:text-purple-900">
+
+  <!-- TOP HEADER / PERSISTENT NAVIGATION -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/80 transition-all duration-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo & Title -->
+      <a href="javascript:void(0)" onclick="navigateTo('home')" class="flex items-center gap-3 group focus:outline-none">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjjukdFKcARxoPOASds9UPASw-_2ckNyHIfUQRL8oFyRHNbdCJ3qHKNPCufeiNa3eIvOvDY0TXoudQNt-zxtOcZahmNXCao5JkW1_hnf2P2IxW3FGskVEq5u2HQaMOMqOcbrQZLf3fsRmDZzB6qRMZpvm__uzmcjCldxgaCRbp8ZE2Pve3EqxIzAkUiqjC0zetgIIYuyfAmzgx56f-UFlRYBztwNpgdJZnY54E4oJpuYN5ShRQ5CstK9eHW64dOrZGAw" alt="Plankshell & Energy Logo" class="h-11 w-auto object-contain transition-transform group-hover:scale-105" />
+        <div class="flex flex-col">
+          <span class="text-lg sm:text-xl font-extrabold tracking-tight text-slate-900 leading-none group-hover:text-blue-900 transition-colors">
+            PLANKSHELL &amp; ENERGY
+          </span>
+          <span class="text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase text-slate-500 mt-1">
+            Rare Metals &amp; Strategic Procurement
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-1 lg:gap-2 text-sm font-semibold text-slate-700">
+        <button onclick="navigateTo('home')" id="nav-btn-home" class="nav-btn px-3 py-2 rounded-md hover:text-slate-950 hover:bg-slate-100 transition-colors">
+          Home
+        </button>
+
+        <!-- Dropdown: About Us -->
+        <div class="relative dropdown-parent group py-2">
+          <button id="nav-btn-about-parent" class="nav-btn flex items-center gap-1.5 px-3 py-2 rounded-md hover:text-slate-950 hover:bg-slate-100 transition-colors">
+            <span>About Us</span>
+            <i class="fa-solid fa-chevron-down text-[11px] transition-transform duration-200 group-hover:rotate-180 text-slate-400 group-hover:text-slate-700"></i>
+          </button>
+
+          <!-- Dropdown bridge & menu -->
+          <div class="dropdown-menu absolute left-0 top-full pt-1.5 w-56 hidden opacity-0 transition-all duration-200 z-50">
+            <div class="bg-white rounded-xl shadow-xl border border-slate-200/90 py-2 divide-y divide-slate-100 overflow-hidden">
+              <div class="py-1">
+                <button onclick="navigateTo('about')" class="w-full text-left px-4 py-2.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-blue-50/70 hover:text-blue-900 flex items-center gap-2.5 transition-colors">
+                  <i class="fa-solid fa-circle-info text-blue-600 text-xs w-4"></i>
+                  <span>About Us Overview</span>
+                </button>
+                <button onclick="navigateTo('team')" class="w-full text-left px-4 py-2.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-blue-50/70 hover:text-blue-900 flex items-center gap-2.5 transition-colors">
+                  <i class="fa-solid fa-users text-blue-600 text-xs w-4"></i>
+                  <span>Executive Team</span>
+                </button>
+                <button onclick="navigateTo('documents')" class="w-full text-left px-4 py-2.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-blue-50/70 hover:text-blue-900 flex items-center gap-2.5 transition-colors">
+                  <i class="fa-solid fa-file-pdf text-red-600 text-xs w-4"></i>
+                  <span>Document Gallery</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="navigateTo('inquiry')" id="nav-btn-inquiry" class="nav-btn px-3 py-2 rounded-md hover:text-slate-950 hover:bg-slate-100 transition-colors">
+          Inquiry
+        </button>
+
+        <button onclick="navigateTo('contact')" id="nav-btn-contact" class="nav-btn px-3 py-2 rounded-md hover:text-slate-950 hover:bg-slate-100 transition-colors">
+          Contact Us
+        </button>
+      </nav>
+
+      <!-- Right CTAs -->
+      <div class="hidden sm:flex items-center gap-3">
+        <button onclick="navigateTo('inquiry')" class="px-4 py-2 text-xs font-bold rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition-colors shadow-sm">
+          Submit Inquiry
+        </button>
+      </div>
+
+      <!-- Mobile Menu Hamburger Button -->
+      <div class="md:hidden flex items-center">
+        <button onclick="toggleMobileMenu()" class="p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg focus:outline-none">
+          <i id="mobile-hamburger-icon" class="fa-solid fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-4 space-y-1 text-sm font-semibold">
+      <button onclick="navigateTo('home'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100">Home</button>
+      <button onclick="navigateTo('about'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100">About Us</button>
+      <button onclick="navigateTo('team'); toggleMobileMenu()" class="w-full text-left px-3 py-2 pl-6 rounded-md hover:bg-slate-100 text-slate-600">↳ Executive Team</button>
+      <button onclick="navigateTo('documents'); toggleMobileMenu()" class="w-full text-left px-3 py-2 pl-6 rounded-md hover:bg-slate-100 text-slate-600">↳ Document Gallery</button>
+      <button onclick="navigateTo('inquiry'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100">Inquiry</button>
+      <button onclick="navigateTo('contact'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100">Contact Us</button>
+    </div>
+  </header>
+
+  <!-- MAIN DYNAMIC CONTENT CONTAINER -->
+  <main class="flex-grow">
+
+    <!-- ======================================================== -->
+    <!-- VIEW 1: HOME PAGE -->
+    <!-- ======================================================== -->
+    <section id="view-home" class="page-view">
+      <!-- Hero Section -->
+      <div class="relative bg-slate-950 text-white overflow-hidden py-16 sm:py-24 border-b border-slate-800">
+        <div class="absolute inset-0 z-0 opacity-25 mix-blend-luminosity">
+          <img src="https://lh3.googleusercontent.com/aida/AEtjO1WtdEPEW-W1m3f6boWVuMzUnqibsqquD_D0fum6onwKjd-Hbwx8nS4WwbKfBJi_SuXDqQf098qt3rAIxSOR8ppiMGP7U1xnSd0agm2mUng3DbkjZTvNaN5zv_aBEwJGcv4IJ3QsxM_IuNUxBHv4cn-75XJTZ1Ai2CXFvcNpDecApt9FIL1ueCa8SX3ICsy0CddVwDlpwNK1ST7ZXkeokyE5G9lFXw6qgd_MrU8OKxZ9IE8Ij75sexxyCQ" alt="Rare Earth Refined Minerals" class="w-full h-full object-cover object-center" />
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-transparent z-0"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="max-w-3xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700 text-[11px] font-semibold tracking-wide text-blue-300 uppercase mb-4 backdrop-blur-sm">
+              <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+              Global Advisory &amp; Metallurgy
+            </div>
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+              Rare Metals Assessment &amp; Strategic Procurement Solutions
+            </h1>
+            <p class="mt-4 text-sm sm:text-base text-slate-300 font-light leading-relaxed max-w-2xl">
+              Specialized solutions for rare metals assessment, analytical verification, sourcing pipelines, and strategic institutional procurement.
+            </p>
+            <div class="mt-8 flex flex-wrap items-center gap-4">
+              <button onclick="navigateTo('about')" class="px-5 py-2.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-white font-bold text-sm transition-all shadow-md flex items-center gap-2">
+                <span>Learn More</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </button>
+              <button onclick="navigateTo('inquiry')" class="px-5 py-2.5 rounded-lg bg-slate-800/90 hover:bg-slate-700 text-white font-semibold text-sm border border-slate-700 transition-all">
+                Direct Inquiry
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Operational Scope Banner -->
+      <div class="bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="lg:col-span-4">
+              <span class="text-xs font-bold text-blue-900 tracking-wider uppercase block">Operational Scope</span>
+              <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mt-1">
+                Institutional Material Governance
+              </h2>
+            </div>
+            <div class="lg:col-span-8 text-sm text-slate-600 leading-relaxed border-l-0 lg:border-l lg:border-slate-200 lg:pl-8">
+              <p>
+                Plankshell &amp; Energy provides specialized testing, valuation, and supply-chain procurement advisory for rare earth elements and critical industrial materials. We partner with industrial leaders and research institutions worldwide to deliver accurate laboratory assessments and secure strategic sourcing.
+              </p>
+              <div class="mt-3 flex flex-wrap items-center gap-4 text-xs font-semibold text-slate-700">
+                <span class="flex items-center gap-1.5"><i class="fa-regular fa-circle-check text-emerald-600"></i> AERB &amp; ISO Calibrated</span>
+                <span class="text-slate-300">•</span>
+                <span class="flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-blue-600"></i> Sovereign &amp; Industrial Discretion</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Core Capabilities Grid (What We Offer) -->
+      <div class="py-16 bg-[#f8f9ff]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Capabilities</span>
+              <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">What We Offer</h2>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-500 max-w-md mt-2 md:mt-0">
+              Precision-engineered services designed to secure high-value mineral supply lines and confirm chemical veracity.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Card 1 -->
+            <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+              <div>
+                <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-lg mb-4">
+                  <i class="fa-solid fa-flask-vial"></i>
+                </div>
+                <div class="text-[11px] font-bold text-slate-400 tracking-wider uppercase">01 / Assays</div>
+                <h3 class="text-base font-bold text-slate-900 mt-1 mb-2">Rare Metals Assessment</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Precise qualitative and quantitative laboratory evaluation of rare earth elements and mineral specimens.
+                </p>
+              </div>
+              <div class="mt-6 pt-4 border-t border-slate-100 text-[11px] font-bold tracking-wider text-slate-400 uppercase">
+                Spectral Analysis
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+              <div>
+                <div class="w-10 h-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center text-lg mb-4">
+                  <i class="fa-solid fa-network-wired"></i>
+                </div>
+                <div class="text-[11px] font-bold text-slate-400 tracking-wider uppercase">02 / Acquisitions</div>
+                <h3 class="text-base font-bold text-slate-900 mt-1 mb-2">Strategic Procurement</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  End-to-end advisory and direct acquisition frameworks for high-demand industrial metallurgy.
+                </p>
+              </div>
+              <div class="mt-6 pt-4 border-t border-slate-100 text-[11px] font-bold tracking-wider text-slate-400 uppercase">
+                Secured Allocations
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+              <div>
+                <div class="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg mb-4">
+                  <i class="fa-solid fa-globe"></i>
+                </div>
+                <div class="text-[11px] font-bold text-slate-400 tracking-wider uppercase">03 / Supply Chains</div>
+                <h3 class="text-base font-bold text-slate-900 mt-1 mb-2">Sourcing Solutions</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Navigating global markets to identify certified suppliers and mitigate supply-chain disruptions.
+                </p>
+              </div>
+              <div class="mt-6 pt-4 border-t border-slate-100 text-[11px] font-bold tracking-wider text-slate-400 uppercase">
+                Route Optimization
+              </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+              <div>
+                <div class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg mb-4">
+                  <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div class="text-[11px] font-bold text-slate-400 tracking-wider uppercase">04 / Compliance</div>
+                <h3 class="text-base font-bold text-slate-900 mt-1 mb-2">Supplier Evaluation</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Rigorous quality compliance, purity verification, and ESG auditing for mining and refining partners.
+                </p>
+              </div>
+              <div class="mt-6 pt-4 border-t border-slate-100 text-[11px] font-bold tracking-wider text-slate-400 uppercase">
+                Assay Verification
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Strategic Heavy Mining & Extraction (With Unbranded Photography) -->
+      <div class="py-12 bg-white border-t border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 lg:p-8 flex flex-col lg:flex-row items-center gap-8">
+            <div class="w-full lg:w-1/2 rounded-xl overflow-hidden shadow-sm">
+              <img src="https://lh3.googleusercontent.com/aida/AEtjO1XB3o1cnf7Am5cTpFORJQ5Jk1po9drUbwE00Obsz1wIh697IelcPvC1-zNjtfzgzbZGmH8Fpx4oBrqPvtM4OzFAHrM_8btga70AoO092say-FjYpqYa4VVZQSWkKzZj6xop2ORACcaBmFRZsnyOMzP7BiCGvciflOKMgb5sWwtySxWNpM7oVyaHLyHvNJsWqFpqlF-z4k0HLGclWQHaxBTireA_smCDRhFOirOgyZXgPYC2ayq4A6k4Yew" alt="Generic Unbranded Heavy Mining Quarry Operations" class="w-full h-72 sm:h-80 object-cover" />
+            </div>
+            <div class="w-full lg:w-1/2">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Heavy Extraction &amp; Resource Recovery</span>
+              <h2 class="text-2xl font-bold text-slate-900 mt-1">Strategic Heavy Mining &amp; Extraction</h2>
+              <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+                Deploying high-capacity heavy mining machinery and advanced excavation protocols across strategic open-pit mineral quarries. We manage precision mechanical loading into heavy haulage fleets, ensuring rigorous origin traceability, chemical integrity, and sovereign resource security from mine face to refinery.
+              </p>
+              <div class="mt-6 flex flex-wrap items-center gap-6 text-xs font-semibold text-slate-700">
+                <span class="flex items-center gap-2"><i class="fa-solid fa-truck-monster text-amber-600"></i> High-Tonnage Extraction</span>
+                <span class="flex items-center gap-2"><i class="fa-solid fa-shield-check text-blue-600"></i> Certified Mine-To-Port Custody</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Engagement Banner -->
+      <div class="bg-slate-900 text-white py-14">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <span class="text-xs uppercase font-bold text-amber-500 tracking-wider">Direct Engagement</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Have an institutional requirement?</h2>
+            <p class="text-sm text-slate-300 mt-1 max-w-xl">
+              Speak directly with our senior metallurgists and procurement strategists to address critical material needs and supply-chain inquiries.
+            </p>
+          </div>
+          <div class="flex items-center gap-3">
+            <button onclick="navigateTo('contact')" class="px-5 py-2.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-white font-bold text-sm transition-colors shadow-md">
+              Contact Us <i class="fa-solid fa-arrow-right text-xs ml-1"></i>
+            </button>
+            <button onclick="navigateTo('inquiry')" class="px-5 py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-semibold text-sm border border-slate-700 transition-colors">
+              Submit RFP
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- VIEW 2: ABOUT US -->
+    <!-- ======================================================== -->
+    <section id="view-about" class="page-view hidden">
+      <div class="bg-white border-b border-slate-200 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
+            <a href="javascript:void(0)" onclick="navigateTo('home')" class="hover:text-slate-900">Home</a>
+            <span>/</span>
+            <span class="text-blue-900 font-bold">About Us</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900">About Us</h1>
+          <p class="text-sm sm:text-base text-slate-600 mt-2 max-w-3xl">
+            Global leaders in rare metals assessment, strategic procurement, and advanced analytical governance.
+          </p>
+        </div>
+      </div>
+
+      <!-- Institutional Profile + Laboratory Photo -->
+      <div class="py-14 bg-[#f8f9ff]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div class="lg:col-span-7">
+              <span class="text-xs font-bold uppercase tracking-wider text-blue-900">Institutional Profile</span>
+              <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1 mb-4">
+                Pioneering Precision Metallurgy &amp; Sovereign Logistics
+              </h2>
+              <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                Plankshell &amp; Energy operates at the intersection of critical materials science and sovereign-grade procurement strategy. We assist industrial entities, advanced manufacturing institutions, and governmental bodies in navigating the complexities of rare earth elements and specialized mineral verification.
+              </p>
+              <p class="text-sm text-slate-600 leading-relaxed mb-6">
+                With escalating global demand and stringent international compliance frameworks, our role is to ensure verified purity, regulatory adherence, and resilient supply integrity across volatile global markets.
+              </p>
+
+              <div class="grid grid-cols-3 gap-4 pt-4 border-t border-slate-200">
+                <div class="bg-white p-3.5 rounded-lg border border-slate-200 text-center">
+                  <span class="block text-xl font-extrabold text-slate-900">17 / 17</span>
+                  <span class="text-[11px] font-bold text-slate-500 uppercase">REE Elements Covered</span>
+                </div>
+                <div class="bg-white p-3.5 rounded-lg border border-slate-200 text-center">
+                  <span class="block text-xl font-extrabold text-slate-900">99.98%</span>
+                  <span class="text-[11px] font-bold text-slate-500 uppercase">Assay Certification</span>
+                </div>
+                <div class="bg-white p-3.5 rounded-lg border border-slate-200 text-center">
+                  <span class="block text-xl font-extrabold text-slate-900">AERB</span>
+                  <span class="text-[11px] font-bold text-slate-500 uppercase">Direct Regulatory Tier</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Lab Tech Photo -->
+            <div class="lg:col-span-5">
+              <div class="relative rounded-2xl overflow-hidden shadow-lg border border-slate-200 bg-white">
+                <img src="https://lh3.googleusercontent.com/aida/AEtjO1U7tTS0FLck-OjiUifr4psNZTkr-KeMkJ8uRkf_rsH7_lsEqibA8UXblhq9RTN19RNZVKD7r9EycMlo8BgcEi669_aTcHaN3YohCNUPhzNpcCFrEDTTcvWl9BFCkrR-5dqrk9IJaznVtJIJELK3ADEqWcmaT4wHj7AHtwzqUf943543FXLdAVeoIp71umJWyCC7k0RXC-MJoEoqflsLWscQ10NOK5RyEJYxJL6vX74ouQlp62uH1VzHqOI" alt="Laboratory Technician Examining Mineral Samples" class="w-full h-80 object-cover" />
+                <div class="p-4 bg-white">
+                  <div class="text-xs font-bold text-slate-800">Analytical Verification Suite</div>
+                  <div class="text-[11px] text-slate-500 mt-0.5">High-precision spectrometry and non-destructive testing environment.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mining Operations Feature with Generic Unbranded Photo -->
+      <div class="py-14 bg-white border-t border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div class="lg:col-span-6 order-2 lg:order-1">
+              <div class="rounded-2xl overflow-hidden shadow-md border border-slate-200">
+                <img src="https://lh3.googleusercontent.com/aida/AEtjO1XB3o1cnf7Am5cTpFORJQ5Jk1po9drUbwE00Obsz1wIh697IelcPvC1-zNjtfzgzbZGmH8Fpx4oBrqPvtM4OzFAHrM_8btga70AoO092say-FjYpqYa4VVZQSWkKzZj6xop2ORACcaBmFRZsnyOMzP7BiCGvciflOKMgb5sWwtySxWNpM7oVyaHLyHvNJsWqFpqlF-z4k0HLGclWQHaxBTireA_smCDRhFOirOgyZXgPYC2ayq4A6k4Yew" alt="Heavy Mining Excavation Equipment" class="w-full h-80 object-cover" />
+              </div>
+            </div>
+            <div class="lg:col-span-6 order-1 lg:order-2">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Upstream Mineral Recovery &amp; Extraction</span>
+              <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1 mb-4">
+                Heavy Extraction &amp; Ore Logistics
+              </h2>
+              <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                High-Capacity Heavy Mining Machinery &amp; Strategic Ore Recovery — Heavy industrial excavation and mechanical loading protocols for critical mineral deposits.
+              </p>
+              <p class="text-sm text-slate-600 leading-relaxed mb-6">
+                Our integrated mechanical excavation operations utilize heavy-duty hydraulic mining excavators and automated haulage fleets to extract, sort, and transport raw rare earth mineral ore directly from strategic deposit beds. Continuous radiological monitoring and isotopic field assay ensure high grade classification prior to refinery transit.
+              </p>
+              <div class="grid grid-cols-2 gap-4">
+                <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+                  <div class="text-lg font-bold text-slate-900">Tier-1 Extraction Fleet</div>
+                  <div class="text-xs text-slate-500">Mechanical Recovery Standard</div>
+                </div>
+                <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+                  <div class="text-lg font-bold text-slate-900">100% Chain</div>
+                  <div class="text-xs text-slate-500">Origin Traceability</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Governance Pillars -->
+      <div class="py-16 bg-[#f8f9ff]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Methodology &amp; Standards</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Institutional Governance Pillars</h2>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+              <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-lg mb-4">
+                <i class="fa-solid fa-flask"></i>
+              </div>
+              <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Precision &amp; Metallurgy</div>
+              <h3 class="text-base font-bold text-slate-900 mt-1 mb-2">Our Expertise</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Deep analytical capabilities across all seventeen rare earth elements, specialized alloys, and non-destructive spectroscopic testing.
+              </p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+              <div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center text-lg mb-4">
+                <i class="fa-solid fa-user-shield"></i>
+              </div>
+              <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Strategic Discretion</div>
+              <h3 class="text-base font-bold text-slate-900 mt-1 mb-2">Our Approach</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Systematic risk assessment, rigorous site audit protocols, and direct sovereign acquisition frameworks tailored to client specifications.
+              </p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+              <div class="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg mb-4">
+                <i class="fa-solid fa-check-double"></i>
+              </div>
+              <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Regulatory Integrity</div>
+              <h3 class="text-base font-bold text-slate-900 mt-1 mb-2">Our Commitment</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Uncompromising compliance with AERB guidelines, international radiological safety benchmarks, and ethical chain-of-custody verification.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- VIEW 3: OUR TEAM (With Click-to-Modal Portrait Viewing) -->
+    <!-- ======================================================== -->
+    <section id="view-team" class="page-view hidden">
+      <div class="bg-white border-b border-slate-200 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
+            <a href="javascript:void(0)" onclick="navigateTo('home')" class="hover:text-slate-900">Home</a>
+            <span>/</span>
+            <a href="javascript:void(0)" onclick="navigateTo('about')" class="hover:text-slate-900">About Us</a>
+            <span>/</span>
+            <span class="text-blue-900 font-bold">Team</span>
+          </div>
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div>
+              <span class="text-[11px] font-bold tracking-wider uppercase text-blue-700 bg-blue-50 px-2.5 py-1 rounded-md inline-block mb-2">Institutional Leadership</span>
+              <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Our Team</h1>
+              <p class="text-sm text-slate-600 mt-1 max-w-2xl">
+                Distinguished leadership directing strategic mineral corridors, regulatory protocols, and precision metallurgical examination.
+              </p>
+            </div>
+            <div class="text-xs text-slate-500 flex items-center gap-1.5 font-medium">
+              <i class="fa-solid fa-arrow-up-right-from-square text-slate-400"></i>
+              <span>Click any card to view official executive portrait</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Team Members Grid -->
+      <div class="py-14 bg-[#f8f9ff]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <!-- Executive 1: Mr S.K Pradha -->
+            <div onclick="openTeamModal('Mr S.K Pradha', 'Chief Coordinator', 'https://lh3.googleusercontent.com/aida/AEtjO1XXN5mfXwrXygkyZvRWaB9wfRPmp-l0Gv6o0hWK7eIpdzGzIC_jiydHMBOnYlg_V6y3QMZbl27LhQJCLHGzXyJo3lfH7UM6j54sJg49yqFFrbEVnPZZvsmZtEtL2MCrX3I3S9A1EyZ4QPiM5WP0G06TnULOlmfl70MWt-WLZXQ7dnna1bAJ_2Nl6kfLxbTje26YsCvAqdD-te2-C-qC3QVku_6K8nrJbp7AjZjBj5g8UkiaCM5-9lwCf4E', 'Executive Directorate', 'Directs corporate policy, high-level sovereign mineral consultations, and institutional strategic relations.')"
+                 class="group bg-slate-950 text-white rounded-2xl p-6 border border-slate-800 shadow-md hover:shadow-xl hover:border-slate-700 transition-all cursor-pointer flex flex-col justify-between relative overflow-hidden">
+              <div class="absolute top-0 right-0 p-4 text-slate-500 group-hover:text-white transition-colors">
+                <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
+              </div>
+              <div>
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-800 text-[10px] font-bold text-amber-400 uppercase tracking-wider mb-6">
+                  <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Executive Directorate
+                </span>
+                <h3 class="text-2xl font-bold text-white group-hover:text-blue-300 transition-colors">Mr S.K Pradha</h3>
+                <div class="text-xs font-semibold text-slate-400 tracking-wider uppercase mt-1">Chief Coordinator</div>
+              </div>
+
+              <div class="mt-12 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400 group-hover:text-slate-200">
+                <span class="flex items-center gap-2">
+                  <i class="fa-regular fa-image text-amber-400"></i> Click to view executive portrait
+                </span>
+                <i class="fa-solid fa-building-shield text-slate-600"></i>
+              </div>
+            </div>
+
+            <!-- Executive 2: Mr J.K Mallia -->
+            <div onclick="openTeamModal('Mr J.K Mallia', 'State Coordinator', 'https://lh3.googleusercontent.com/aida/AEtjO1V_2KX1xvzDF7wSvJ0qp5B50h3cXQQpKgWUFsLmlYmBJsW7tfPKuojLg0CWM4XI4Vfgoh7-M9vFN2PNZWcQOSIo1iOCPRr-P99UgTpURsj39AA8i1dyMclcjr3HIyiP_0Yuy9bYjMqOn75hcHuDXXEfQKcGs6b4PQcnwCrvCQapExllJGn6u9yDtLDTugHoDQrZkaekMo5E56VF9EW5B5m8g0-46V9yEnVfSESuPDWVG2Rv1lUvG0zO7g0', 'Regional Directorate', 'Oversees national state-level regulatory coordination, material licensing, and territorial logistics monitoring.')"
+                 class="group bg-slate-950 text-white rounded-2xl p-6 border border-slate-800 shadow-md hover:shadow-xl hover:border-slate-700 transition-all cursor-pointer flex flex-col justify-between relative overflow-hidden">
+              <div class="absolute top-0 right-0 p-4 text-slate-500 group-hover:text-white transition-colors">
+                <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
+              </div>
+              <div>
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-800 text-[10px] font-bold text-blue-400 uppercase tracking-wider mb-6">
+                  <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Regional Directorate
+                </span>
+                <h3 class="text-2xl font-bold text-white group-hover:text-blue-300 transition-colors">Mr J.K Mallia</h3>
+                <div class="text-xs font-semibold text-slate-400 tracking-wider uppercase mt-1">State Coordinator</div>
+              </div>
+
+              <div class="mt-12 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400 group-hover:text-slate-200">
+                <span class="flex items-center gap-2">
+                  <i class="fa-regular fa-image text-blue-400"></i> Click to view executive portrait
+                </span>
+                <i class="fa-solid fa-certificate text-slate-600"></i>
+              </div>
+            </div>
+
+            <!-- Executive 3: Mr Ananta Singh -->
+            <div onclick="openTeamModal('Mr Ananta Singh', 'Head Examiner', 'https://lh3.googleusercontent.com/aida/AEtjO1VeBWJCDJyi1jDisWnuR4LyQom-WXv6Mqxfl7-iVNavctTqCxJeLc7a6xJUPfGaSL4qSIyIK1UTEIH4c6X5vIR_zy5jTzssc2xT3vHO6AvtDPAmJF_n_IrlE1vLczmC2N6wF4I6RRsuAYoIj_jV3jhQB0SwN_Ghpr8ytUPWwjwCOfxy-V091MNiCR4ekL_ZrekQl93wFM3NuqI1PYFjLXvShLKJXG1ahE0-53rJyken7ufw5OYUrOynv3Y', 'Technical Verification', 'Leads spectroscopic verification, elemental assay verification protocols, and laboratory material certification.')"
+                 class="group bg-slate-950 text-white rounded-2xl p-6 border border-slate-800 shadow-md hover:shadow-xl hover:border-slate-700 transition-all cursor-pointer flex flex-col justify-between relative overflow-hidden">
+              <div class="absolute top-0 right-0 p-4 text-slate-500 group-hover:text-white transition-colors">
+                <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
+              </div>
+              <div>
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-800 text-[10px] font-bold text-emerald-400 uppercase tracking-wider mb-6">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Technical Verification
+                </span>
+                <h3 class="text-2xl font-bold text-white group-hover:text-blue-300 transition-colors">Mr Ananta Singh</h3>
+                <div class="text-xs font-semibold text-slate-400 tracking-wider uppercase mt-1">Head Examiner</div>
+              </div>
+
+              <div class="mt-12 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400 group-hover:text-slate-200">
+                <span class="flex items-center gap-2">
+                  <i class="fa-regular fa-image text-emerald-400"></i> Click to view executive portrait
+                </span>
+                <i class="fa-solid fa-microscope text-slate-600"></i>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Council Note -->
+          <div class="mt-10 bg-white border border-slate-200 rounded-xl p-5 flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center text-sm">
+                <i class="fa-solid fa-landmark"></i>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-600">
+                Our multidisciplinary executive council brings together decades of combined operational leadership across strategic mineral governance, state coordination, and institutional analytical standards.
+              </p>
+            </div>
+            <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wider whitespace-nowrap hidden sm:block">
+              Active Council Session: Q2 2026
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- VIEW 4: DOCUMENT GALLERY (PDF Profile Launcher) -->
+    <!-- ======================================================== -->
+    <section id="view-documents" class="page-view hidden">
+      <div class="bg-white border-b border-slate-200 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
+            <a href="javascript:void(0)" onclick="navigateTo('home')" class="hover:text-slate-900">Home</a>
+            <span>/</span>
+            <a href="javascript:void(0)" onclick="navigateTo('about')" class="hover:text-slate-900">About Us</a>
+            <span>/</span>
+            <span class="text-blue-900 font-bold">Document Gallery</span>
+          </div>
+          <span class="text-[11px] font-bold tracking-wider uppercase text-blue-700 bg-blue-50 px-2.5 py-1 rounded-md inline-block mb-2">Authenticated Repository</span>
+          <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Document Gallery</h1>
+          <p class="text-sm text-slate-600 mt-1 max-w-2xl">
+            Official corporate disclosures, certified analytical protocols, and institutional compliance documentation.
+          </p>
+        </div>
+      </div>
+
+      <!-- Minimal Dedicated Document Section with PDF Launcher -->
+      <div class="py-24 bg-[#f8f9ff] flex items-center justify-center min-h-[450px]">
+        <div class="max-w-lg w-full px-4 text-center">
+          <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center">
+            <div class="w-16 h-16 rounded-2xl bg-red-50 text-red-600 flex items-center justify-center text-3xl mb-4">
+              <i class="fa-solid fa-file-pdf"></i>
+            </div>
+            <h2 class="text-xl font-bold text-slate-900 mb-2">Corporate Documentation</h2>
+            <p class="text-xs text-slate-500 mb-8 max-w-xs leading-relaxed">
+              Click below to view and download the official verified Plankshell &amp; Energy corporate dossier.
+            </p>
+
+            <!-- Verified Exact Red Button from User Specification -->
+            <a href="plankshellandenergy-profile.pdf" target="_blank" 
+               class="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-lg bg-[#e51a24] hover:bg-[#c9121c] text-white font-bold text-sm sm:text-base tracking-wide shadow-md transition-all transform hover:-translate-y-0.5 active:translate-y-0">
+              <i class="fa-regular fa-file-pdf text-lg"></i>
+              <span>Plankshellandenergy Profile</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1"></i>
+            </a>
+
+            <div class="mt-6 text-[11px] text-slate-400 flex items-center gap-1.5">
+              <i class="fa-solid fa-lock text-[10px]"></i>
+              <span>Authentic Encrypted PDF Protocol • Formally Registered</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- VIEW 5: INQUIRY FORM (Google Forms Replica) -->
+    <!-- ======================================================== -->
+    <section id="view-inquiry" class="page-view hidden">
+      <div class="bg-[#f0ebf8] py-8 sm:py-12 min-h-screen">
+        <div class="max-w-2xl mx-auto px-4">
+          
+          <!-- Google Forms Container Card -->
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden mb-4 border-t-8 border-t-[#673ab7]">
+            <div class="p-6 sm:p-8">
+              <h1 class="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight">Inquiry form</h1>
+              <div class="mt-3 flex items-center justify-between text-xs text-slate-600 border-t border-slate-100 pt-3">
+                <span class="text-blue-600 hover:underline cursor-pointer">Sign in to Google to save your progress. Learn more</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form Fields Stack -->
+          <form id="googleInquiryForm" onsubmit="handleInquirySubmit(event)" class="space-y-4">
+
+            <!-- Field 1: Name -->
+            <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+              <label class="block text-sm font-medium text-slate-800 mb-4">
+                Name (First&amp; last) <span class="text-red-500">*</span>
+              </label>
+              <input type="text" name="name" required placeholder="Your answer"
+                     class="w-full sm:w-3/4 border-b border-slate-300 focus:border-[#673ab7] focus:outline-none py-1.5 text-sm transition-colors text-slate-800" />
+            </div>
+
+            <!-- Field 2: Address -->
+            <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+              <label class="block text-sm font-medium text-slate-800 mb-4">Address</label>
+              <input type="text" name="address" placeholder="Your answer"
+                     class="w-full sm:w-3/4 border-b border-slate-300 focus:border-[#673ab7] focus:outline-none py-1.5 text-sm transition-colors text-slate-800" />
+            </div>
+
+            <!-- Field 3: City -->
+            <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+              <label class="block text-sm font-medium text-slate-800 mb-4">City</label>
+              <input type="text" name="city" placeholder="Your answer"
+                     class="w-full sm:w-3/4 border-b border-slate-300 focus:border-[#673ab7] focus:outline-none py-1.5 text-sm transition-colors text-slate-800" />
+            </div>
+
+            <!-- Field 4: State -->
+            <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+              <label class="block text-sm font-medium text-slate-800 mb-4">State</label>
+              <input type="text" name="state" placeholder="Your answer"
+                     class="w-full sm:w-3/4 border-b border-slate-300 focus:border-[#673ab7] focus:outline-none py-1.5 text-sm transition-colors text-slate-800" />
+            </div>
+
+            <!-- Field 5: Country -->
+            <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+              <label class="block text-sm font-medium text-slate-800 mb-4">Country</label>
+              <input type="text" name="country" placeholder="Your answer"
+                     class="w-full sm:w-3/4 border-b border-slate-300 focus:border-[#673ab7] focus:outline-none py-1.5 text-sm transition-colors text-slate-800" />
+            </div>
+
+            <!-- Field 6: Pan Number -->
+            <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+              <label class="block text-sm font-medium text-slate-800 mb-4">Pan Number</label>
+              <input type="text" name="pan_number" placeholder="Your answer"
+                     class="w-full sm:w-3/4 border-b border-slate-300 focus:border-[#673ab7] focus:outline-none py-1.5 text-sm transition-colors text-slate-800 uppercase" />
+            </div>
+
+            <!-- Field 7: Aadhar Number -->
+            <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+              <label class="block text-sm font-medium text-slate-800 mb-4">Aadhar Number</label>
+              <input type="text" name="aadhar_number" placeholder="Your answer"
+                     class="w-full sm:w-3/4 border-b border-slate-300 focus:border-[#673ab7] focus:outline-none py-1.5 text-sm transition-colors text-slate-800" />
+            </div>
+
+            <!-- Field 8: Mail -->
+            <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+              <label class="block text-sm font-medium text-slate-800 mb-4">
+                Mail <span class="text-red-500">*</span>
+              </label>
+              <input type="email" name="mail" required placeholder="Your answer"
+                     class="w-full sm:w-3/4 border-b border-slate-300 focus:border-[#673ab7] focus:outline-none py-1.5 text-sm transition-colors text-slate-800" />
+            </div>
+
+            <!-- Field 9: Mobile Number -->
+            <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+              <label class="block text-sm font-medium text-slate-800 mb-4">Mobile Number</label>
+              <input type="tel" name="mobile" placeholder="Your answer"
+                     class="w-full sm:w-3/4 border-b border-slate-300 focus:border-[#673ab7] focus:outline-none py-1.5 text-sm transition-colors text-slate-800" />
+            </div>
+
+            <!-- Field 10: Client Massage -->
+            <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+              <label class="block text-sm font-medium text-slate-800 mb-4">Client Massage</label>
+              <input type="text" name="client_message" placeholder="Your answer"
+                     class="w-full sm:w-3/4 border-b border-slate-300 focus:border-[#673ab7] focus:outline-none py-1.5 text-sm transition-colors text-slate-800" />
+            </div>
+
+            <!-- Form Actions -->
+            <div class="flex items-center justify-between pt-2">
+              <button type="submit" 
+                      class="px-6 py-2.5 rounded-md bg-[#673ab7] hover:bg-[#5e35b1] text-white text-sm font-medium transition-colors shadow-sm focus:outline-none">
+                Submit
+              </button>
+              <button type="reset" 
+                      class="text-xs font-semibold text-[#673ab7] hover:bg-purple-50 px-3 py-2 rounded transition-colors">
+                Clear form
+              </button>
+            </div>
+          </form>
+
+          <!-- Google form footer note -->
+          <div class="mt-8 text-center text-[11px] text-slate-500 space-y-2">
+            <div>Never submit passwords through Google Forms.</div>
+            <div class="text-slate-400">This content is neither created nor endorsed by Google. - Terms of Service - Privacy Policy</div>
+            <div class="text-slate-600 font-semibold text-sm pt-2">Google Forms</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- VIEW 6: CONTACT US (With PHP form script hook & map) -->
+    <!-- ======================================================== -->
+    <section id="view-contact" class="page-view hidden">
+      <div class="bg-white border-b border-slate-200 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
+            <a href="javascript:void(0)" onclick="navigateTo('home')" class="hover:text-slate-900">Home</a>
+            <span>/</span>
+            <span class="text-blue-900 font-bold">Contact Us</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Contact To Plankshellandenergy.</h1>
+        </div>
+      </div>
+
+      <div class="py-14 bg-[#f8f9ff]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+
+            <!-- Left: Contact Form -->
+            <div class="lg:col-span-7 bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
+              <h2 class="text-xl font-bold text-slate-900 mb-6">Contact Form Demo</h2>
+
+              <!-- Status Alert Box -->
+              <div id="contactStatusAlert" class="hidden mb-6 p-4 rounded-lg text-sm"></div>
+
+              <form id="contactPhpForm" onsubmit="handleContactSubmit(event)" action="contact.php" method="POST" class="space-y-5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">First Name</label>
+                    <input type="text" name="first_name" required placeholder="First Name" 
+                           class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 text-sm outline-none" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Last Name</label>
+                    <input type="text" name="last_name" placeholder="Last Name" 
+                           class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 text-sm outline-none" />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Email <span class="text-red-500">*</span></label>
+                  <input type="email" name="email" required placeholder="Email Address" 
+                         class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 text-sm outline-none" />
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Subject</label>
+                  <input type="text" name="subject" placeholder="Subject" 
+                         class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 text-sm outline-none" />
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Your Message <span class="text-red-500">*</span></label>
+                  <textarea name="message" required rows="5" placeholder="Your Message" 
+                            class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 text-sm outline-none"></textarea>
+                </div>
+
+                <div class="flex items-center gap-4 pt-2">
+                  <button type="submit" 
+                          class="px-6 py-3 rounded-lg bg-[#e86b24] hover:bg-[#d45c18] text-white font-bold text-sm tracking-wide transition-colors shadow-sm">
+                    Submit Form
+                  </button>
+                  <button type="button" onclick="togglePhpModal()" class="text-xs text-slate-500 hover:text-blue-600 underline font-medium">
+                    &lt;/&gt; View PHP Backend Script (contact.php)
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Right: Office Address Details & Interactive Map Placeholder -->
+            <div class="lg:col-span-5 space-y-6">
+              
+              <!-- Address Details Card -->
+              <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                
+                <!-- Office Address Block -->
+                <div>
+                  <div class="flex items-center gap-2 text-sm font-bold text-slate-900 mb-3">
+                    <i class="fa-solid fa-location-dot text-blue-600"></i>
+                    <span>Address:</span>
+                  </div>
+                  <div class="space-y-4 text-xs text-slate-600 leading-relaxed pl-5">
+                    <div>
+                      <strong class="text-slate-900 block font-semibold">Global Office Address:</strong>
+                      <span>Svetsarvagen, 10 Solna Business Park, Stockholm, Sweden</span>
+                    </div>
+                    <div>
+                      <strong class="text-slate-900 block font-semibold">National Office Address:</strong>
+                      <span>Marine Drive, GRD Nariman Point, Mumbai, Maharatra 400021</span>
+                    </div>
+                  </div>
+                </div>
+
+                <hr class="border-slate-100" />
+
+                <!-- Email Block -->
+                <div>
+                  <div class="flex items-center gap-2 text-sm font-bold text-slate-900 mb-2">
+                    <i class="fa-regular fa-envelope text-blue-600"></i>
+                    <span>Email:</span>
+                  </div>
+                  <div class="pl-5">
+                    <a href="mailto:plankshellandenergy@gmail.com" class="text-xs font-semibold text-blue-600 hover:underline">
+                      plankshellandenergy@gmail.com
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Map Card (Svetsarvägen) -->
+              <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <div class="p-3 bg-slate-100 border-b border-slate-200 flex items-center justify-between text-xs">
+                  <div class="font-bold text-slate-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-map-pin text-red-500"></i>
+                    <span>Svetsarvägen 6-10, 171 41 Solna, Sweden</span>
+                  </div>
+                  <a href="https://maps.google.com/?q=Svetsarvägen+10,+Solna+Business+Park,+Stockholm" target="_blank" class="text-blue-600 hover:text-blue-800">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </a>
+                </div>
+                <!-- Stylized map graphic -->
+                <div class="h-44 bg-slate-200 relative flex items-center justify-center overflow-hidden">
+                  <div class="absolute inset-0 opacity-40" style="background-image: radial-gradient(#94a3b8 1px, transparent 1px); background-size: 16px 16px;"></div>
+                  <div class="relative z-10 bg-white/90 backdrop-blur-sm p-3 rounded-lg shadow-sm border border-slate-300 text-center">
+                    <div class="text-xs font-bold text-slate-800">Plankshell &amp; Energy Global Office</div>
+                    <div class="text-[11px] text-slate-500">Stockholm, Sweden</div>
+                    <a href="https://maps.google.com/?q=Svetsarvägen+10,+Solna+Business+Park,+Stockholm" target="_blank" 
+                       class="mt-2 inline-block text-[10px] font-bold uppercase text-blue-700 hover:underline">
+                      Open in Google Maps →
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- PERSISTENT FOOTER (Matching Home page exactly) -->
+  <!-- ======================================================== -->
+  <footer class="bg-slate-950 text-white border-t border-slate-800 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+        
+        <!-- Col 1: Brand Info -->
+        <div class="md:col-span-4">
+          <div class="flex items-center gap-3 mb-4">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNdycMMFxv24n_YmQGKDvh1S5i_xa2CLGfTygpgZlzhlYgY8LUa2Hdf89ikpt6tUlN0Ot9HOK0j63LL--kTmzVmtepohhdDmRJ1CDnx0uFeD1Na8PXyrarrgRhwcsPG-wjKlQbgF4pwuNIVzf5RGQRzga5khpqZF3ISj4rrTneJ0wspL9cF7ho_sGCgmwxPBagRkPyfGYA2luCBeNE1d-jzQ8WyiGImPjxSzqNt7dQ9XW2Zzb46cfFjsAVH9oD-EkmHw" alt="Plankshell & Energy Logo" class="h-10 w-auto object-contain" />
+            <span class="text-lg font-extrabold tracking-tight text-white">PLANKSHELL &amp; ENERGY</span>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed mb-4">
+            Global leaders in rare metals assessment and strategic procurement solutions.
+          </p>
+          <div class="text-xs text-slate-300 flex items-center gap-2">
+            <i class="fa-regular fa-envelope text-blue-400"></i>
+            <a href="mailto:plankshellandenergy@gmail.com" class="hover:text-white transition-colors">
+              plankshellandenergy@gmail.com
+            </a>
+          </div>
+        </div>
+
+        <!-- Col 2: Navigation Links -->
+        <div class="md:col-span-3">
+          <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-3">Navigation</h3>
+          <ul class="space-y-2 text-xs text-slate-400 font-medium">
+            <li><button onclick="navigateTo('home')" class="hover:text-white transition-colors">Home</button></li>
+            <li><button onclick="navigateTo('about')" class="hover:text-white transition-colors">About Us</button></li>
+            <li><button onclick="navigateTo('team')" class="hover:text-white transition-colors">Team</button></li>
+            <li><button onclick="navigateTo('documents')" class="hover:text-white transition-colors">Document Gallery</button></li>
+            <li><button onclick="navigateTo('inquiry')" class="hover:text-white transition-colors">Inquiry</button></li>
+            <li><button onclick="navigateTo('contact')" class="hover:text-white transition-colors">Contact Us</button></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Offices -->
+        <div class="md:col-span-5 space-y-4">
+          <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Offices &amp; Inquiries</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-slate-400">
+            <div>
+              <span class="block font-bold text-slate-200 uppercase text-[10px] tracking-wider mb-1 flex items-center gap-1.5">
+                <i class="fa-solid fa-location-dot text-amber-500"></i> National Office
+              </span>
+              <p class="leading-relaxed">Marine Drive, GRD Nariman Point, Mumbai, Maharashtra 400021</p>
+            </div>
+            <div>
+              <span class="block font-bold text-slate-200 uppercase text-[10px] tracking-wider mb-1 flex items-center gap-1.5">
+                <i class="fa-solid fa-location-dot text-blue-400"></i> Global Office
+              </span>
+              <p class="leading-relaxed">Svetsarvägen 10, Solna Business Park, Stockholm, Sweden</p>
+            </div>
+          </div>
+          <div class="pt-2 text-[11px] text-slate-500">
+            Strict Strategic Discretion Assured • Verified Material Chain-of-Custody
+          </div>
+        </div>
+
+      </div>
+
+      <div class="mt-12 pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+        <div>© 2026 Plankshell &amp; Energy Co. All Rights Reserved.</div>
+        <div class="flex items-center gap-6">
+          <button onclick="navigateTo('about')" class="hover:text-slate-300">Governance</button>
+          <button onclick="navigateTo('documents')" class="hover:text-slate-300">Assay Standards</button>
+          <button onclick="navigateTo('contact')" class="hover:text-slate-300">Secretariat</button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: EXECUTIVE TEAM PORTRAIT (Click any box to view) -->
+  <!-- ======================================================== -->
+  <div id="teamPortraitModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl border border-slate-200 relative animate-in fade-in zoom-in-95 duration-150">
+      
+      <!-- Close button -->
+      <button onclick="closeTeamModal()" class="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-slate-900/70 hover:bg-slate-900 text-white flex items-center justify-center transition-colors">
+        <i class="fa-solid fa-xmark text-sm"></i>
+      </button>
+
+      <div class="relative bg-slate-100 flex items-center justify-center">
+        <img id="modalPortraitImg" src="" alt="Executive Portrait" class="w-full h-80 object-cover object-top" />
+      </div>
+
+      <div class="p-6">
+        <span id="modalPortraitDept" class="text-[10px] font-bold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-full uppercase tracking-wider">
+          Executive Directorate
+        </span>
+        <h3 id="modalPortraitName" class="text-2xl font-bold text-slate-900 mt-2">Executive Name</h3>
+        <div id="modalPortraitRole" class="text-xs font-semibold text-slate-500 uppercase tracking-wider mt-0.5">Designation</div>
+        <p id="modalPortraitBio" class="text-xs text-slate-600 mt-3 leading-relaxed">Executive background description.</p>
+        
+        <div class="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+          <span>Official Corporate Portrait</span>
+          <button onclick="closeTeamModal()" class="px-3 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: PHP BACKEND CODE VIEWER (contact.php) -->
+  <!-- ======================================================== -->
+  <div id="phpCodeModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-slate-900 text-slate-100 rounded-2xl max-w-2xl w-full max-h-[85vh] flex flex-col shadow-2xl border border-slate-700 overflow-hidden">
+      <div class="px-6 py-4 bg-slate-800 flex items-center justify-between border-b border-slate-700">
+        <div class="flex items-center gap-2">
+          <i class="fa-brands fa-php text-blue-400 text-xl"></i>
+          <span class="text-sm font-bold text-white">contact.php — Mailer Script</span>
+        </div>
+        <button onclick="togglePhpModal()" class="text-slate-400 hover:text-white">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+      <div class="p-6 overflow-y-auto font-mono text-xs text-slate-300 leading-relaxed bg-slate-950">
+        <pre><code>&lt;?php
+// contact.php - Plankshell & Energy Official Form Processor
+header('Content-Type: application/json; charset=utf-8');
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    echo json_encode(['success' => false, 'message' => 'Method Not Allowed']);
+    exit;
+}
+
+$recipient = "plankshellandenergy@gmail.com";
+
+// Input sanitization
+$firstName = isset($_POST['first_name']) ? trim(filter_var($_POST['first_name'], FILTER_SANITIZE_SPECIAL_CHARS)) : '';
+$lastName  = isset($_POST['last_name'])  ? trim(filter_var($_POST['last_name'], FILTER_SANITIZE_SPECIAL_CHARS)) : '';
+$email     = isset($_POST['email'])      ? trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL)) : '';
+$subject   = isset($_POST['subject'])    ? trim(filter_var($_POST['subject'], FILTER_SANITIZE_SPECIAL_CHARS)) : 'New Website Inquiry';
+$message   = isset($_POST['message'])    ? trim(filter_var($_POST['message'], FILTER_SANITIZE_SPECIAL_CHARS)) : '';
+
+if (empty($firstName) || empty($email) || empty($message)) {
+    http_response_code(400);
+    echo json_encode(['success' => false, 'message' => 'Please fill in all required fields.']);
+    exit;
+}
+
+$fullName = trim("$firstName $lastName");
+$emailSubject = "[Plankshell & Energy Website] " . $subject;
+$emailBody = "Name: $fullName\nEmail: $email\nSubject: $subject\n\nMessage:\n$message\n";
+
+$headers = [
+    "From: webmaster@" . ($_SERVER['SERVER_NAME'] ?? 'plankshellandenergy.com'),
+    "Reply-To: " . $email,
+    "Content-Type: text/plain; charset=UTF-8"
+];
+
+$mailSent = @mail($recipient, $emailSubject, $emailBody, implode("\r\n", $headers));
+
+echo json_encode([
+    'success' => true,
+    'message' => 'Your inquiry has been successfully dispatched to plankshellandenergy@gmail.com.'
+]);
+exit;
+?&gt;</code></pre>
+      </div>
+      <div class="p-4 bg-slate-800 text-right border-t border-slate-700">
+        <button onclick="togglePhpModal()" class="px-4 py-1.5 rounded bg-slate-700 hover:bg-slate-600 text-xs font-semibold text-white">
+          Close Script
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING SCROLL TO TOP BUTTON -->
+  <button id="scrollToTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+          class="fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full bg-slate-900 text-white shadow-lg border border-slate-700 flex items-center justify-center hover:bg-blue-900 transition-all opacity-0 pointer-events-none">
+    <i class="fa-solid fa-arrow-up text-sm"></i>
+  </button>
+
+  <!-- APPLICATION INTERACTIVITY JAVASCRIPT -->
+  <script>
+    // Navigation routing logic
+    function navigateTo(viewName) {
+      // Hide all views
+      const views = document.querySelectorAll('.page-view');
+      views.forEach(v => v.classList.add('hidden'));
+
+      // Show targeted view
+      const target = document.getElementById('view-' + viewName);
+      if (target) {
+        target.classList.remove('hidden');
+      }
+
+      // Update Nav active styling
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('text-blue-900', 'font-extrabold', 'bg-blue-50/80');
+      });
+
+      if (viewName === 'home') {
+        document.getElementById('nav-btn-home')?.classList.add('text-blue-900', 'font-extrabold');
+      } else if (viewName === 'about' || viewName === 'team' || viewName === 'documents') {
+        document.getElementById('nav-btn-about-parent')?.classList.add('text-blue-900', 'font-extrabold');
+      } else if (viewName === 'inquiry') {
+        document.getElementById('nav-btn-inquiry')?.classList.add('text-blue-900', 'font-extrabold');
+      } else if (viewName === 'contact') {
+        document.getElementById('nav-btn-contact')?.classList.add('text-blue-900', 'font-extrabold');
+      }
+
+      // Scroll to top upon page navigation
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Toggle Mobile menu
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const icon = document.getElementById('mobile-hamburger-icon');
+      if (menu.classList.contains('hidden')) {
+        menu.classList.remove('hidden');
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-xmark');
+      } else {
+        menu.classList.add('hidden');
+        icon.classList.remove('fa-xmark');
+        icon.classList.add('fa-bars');
+      }
+    }
+
+    // Executive team modal opening
+    function openTeamModal(name, role, imgSrc, dept, bio) {
+      document.getElementById('modalPortraitName').innerText = name;
+      document.getElementById('modalPortraitRole').innerText = role;
+      document.getElementById('modalPortraitImg').src = imgSrc;
+      document.getElementById('modalPortraitDept').innerText = dept;
+      document.getElementById('modalPortraitBio').innerText = bio;
+      document.getElementById('teamPortraitModal').classList.remove('hidden');
+    }
+
+    function closeTeamModal() {
+      document.getElementById('teamPortraitModal').classList.add('hidden');
+    }
+
+    // PHP Script viewer modal
+    function togglePhpModal() {
+      const modal = document.getElementById('phpCodeModal');
+      modal.classList.toggle('hidden');
+    }
+
+    // Form handlers
+    function handleInquirySubmit(e) {
+      e.preventDefault();
+      alert('Thank you. Your inquiry has been logged for Plankshell & Energy institutional review.');
+      e.target.reset();
+    }
+
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      const alertBox = document.getElementById('contactStatusAlert');
+      alertBox.className = "mb-6 p-4 rounded-lg text-sm bg-emerald-50 text-emerald-800 border border-emerald-200 block";
+      alertBox.innerHTML = '<i class="fa-solid fa-check-circle mr-1.5"></i> Thank you! Your message has been sent to <strong>plankshellandenergy@gmail.com</strong>.';
+      e.target.reset();
+    }
+
+    // Scroll-to-top button appearance observer
+    window.addEventListener('scroll', () => {
+      const scrollBtn = document.getElementById('scrollToTopBtn');
+      if (window.scrollY > 300) {
+        scrollBtn.classList.remove('opacity-0', 'pointer-events-none');
+        scrollBtn.classList.add('opacity-100');
+      } else {
+        scrollBtn.classList.add('opacity-0', 'pointer-events-none');
+        scrollBtn.classList.remove('opacity-100');
+      }
+    });
+
+    // Close modals on Escape key or outside click
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeTeamModal();
+        document.getElementById('phpCodeModal').classList.add('hidden');
+      }
+    });
+
+    document.getElementById('teamPortraitModal')?.addEventListener('click', (e) => {
+      if (e.target.id === 'teamPortraitModal') closeTeamModal();
+    });
+
+    document.getElementById('phpCodeModal')?.addEventListener('click', (e) => {
+      if (e.target.id === 'phpCodeModal') togglePhpModal();
+    });
+
+    // Default initialization
+    navigateTo('home');
+  </script>
+</body>
+</html>
