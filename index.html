@@ -27,6 +27,27 @@
         }
       }
     }
+
+    // Disable right-click context menu
+document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+// Disable copy/cut
+document.addEventListener('copy', (e) => e.preventDefault());
+document.addEventListener('cut', (e) => e.preventDefault());
+
+// Disable common shortcuts: Ctrl+C, Ctrl+X, Ctrl+U (view source), Ctrl+S, F12, Ctrl+Shift+I
+document.addEventListener('keydown', (e) => {
+  if (
+    (e.ctrlKey && ['c', 'x', 'u', 's'].includes(e.key.toLowerCase())) ||
+    e.key === 'F12' ||
+    (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key))
+  ) {
+    e.preventDefault();
+  }
+});
+
+// Disable dragging images (a common way to save/copy images)
+document.addEventListener('dragstart', (e) => e.preventDefault());
   </script>
   <style>
     /* Custom clean scrollbar */
