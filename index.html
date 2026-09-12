@@ -82,7 +82,7 @@ document.addEventListener('dragstart', (e) => e.preventDefault());
       
       <!-- Brand Logo & Title -->
       <a href="javascript:void(0)" onclick="navigateTo('home')" class="flex items-center gap-3 group focus:outline-none">
-        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjjukdFKcARxoPOASds9UPASw-_2ckNyHIfUQRL8oFyRHNbdCJ3qHKNPCufeiNa3eIvOvDY0TXoudQNt-zxtOcZahmNXCao5JkW1_hnf2P2IxW3FGskVEq5u2HQaMOMqOcbrQZLf3fsRmDZzB6qRMZpvm__uzmcjCldxgaCRbp8ZE2Pve3EqxIzAkUiqjC0zetgIIYuyfAmzgx56f-UFlRYBztwNpgdJZnY54E4oJpuYN5ShRQ5CstK9eHW64dOrZGAw" alt="Plankshell &amp; Energy Logo" class="h-11 w-auto object-contain transition-transform group-hover:scale-105">
+        <img src="photos/PSE_LOGO.jpg" alt="Plankshell &amp; Energy Logo" class="h-11 w-auto object-contain transition-transform group-hover:scale-105">
         <div class="flex flex-col">
           <span class="text-lg sm:text-xl font-extrabold tracking-tight text-slate-900 leading-none group-hover:text-blue-900 transition-colors">
             PLANKSHELL &amp; ENERGY
@@ -868,8 +868,8 @@ document.addEventListener('dragstart', (e) => e.preventDefault());
                     <span class="">Email:</span>
                   </div>
                   <div class="pl-5">
-                    <a href="mailto:plankshellandenergy@gmail.com" class="text-xs font-semibold text-blue-600 hover:underline">
-                      plankshellandenergy@gmail.com
+                    <a href="mailto:abc@gmail.com" class="text-xs font-semibold text-blue-600 hover:underline">
+                      abc@gmail.com
                     </a>
                   </div>
                 </div>
@@ -898,7 +898,7 @@ document.addEventListener('dragstart', (e) => e.preventDefault());
         <!-- Col 1: Brand Info -->
         <div class="md:col-span-4">
           <div class="flex items-center gap-3 mb-4">
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNdycMMFxv24n_YmQGKDvh1S5i_xa2CLGfTygpgZlzhlYgY8LUa2Hdf89ikpt6tUlN0Ot9HOK0j63LL--kTmzVmtepohhdDmRJ1CDnx0uFeD1Na8PXyrarrgRhwcsPG-wjKlQbgF4pwuNIVzf5RGQRzga5khpqZF3ISj4rrTneJ0wspL9cF7ho_sGCgmwxPBagRkPyfGYA2luCBeNE1d-jzQ8WyiGImPjxSzqNt7dQ9XW2Zzb46cfFjsAVH9oD-EkmHw" alt="Plankshell &amp; Energy Logo" class="h-10 w-auto object-contain">
+            <img src="photos/PSE_LOGO.jpg" alt="Plankshell &amp; Energy Logo" class="h-10 w-auto object-contain">
             <span class="text-lg font-extrabold tracking-tight text-white">PLANKSHELL &amp; ENERGY</span>
           </div>
           <p class="text-xs text-slate-400 leading-relaxed mb-4">
@@ -906,8 +906,8 @@ document.addEventListener('dragstart', (e) => e.preventDefault());
           </p>
           <div class="text-xs text-slate-300 flex items-center gap-2">
             <i class="fa-regular fa-envelope text-blue-400"></i>
-            <a href="mailto:plankshellandenergy@gmail.com" class="hover:text-white transition-colors">
-              plankshellandenergy@gmail.com
+            <a href="mailto:abc@gmail.com" class="hover:text-white transition-colors">
+              abc@gmail.com
             </a>
           </div>
         </div>
@@ -1018,7 +1018,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-$recipient = "plankshellandenergy@gmail.com";
+$recipient = "abc@gmail.com";
 
 // Input sanitization
 $firstName = isset($_POST['first_name']) ? trim(filter_var($_POST['first_name'], FILTER_SANITIZE_SPECIAL_CHARS)) : '';
@@ -1047,7 +1047,7 @@ $mailSent = @mail($recipient, $emailSubject, $emailBody, implode("\r\n", $header
 
 echo json_encode([
     'success' =&gt; true,
-    'message' =&gt; 'Your inquiry has been successfully dispatched to plankshellandenergy@gmail.com.'
+    'message' =&gt; 'Your inquiry has been successfully dispatched to abc@gmail.com.'
 ]);
 exit;
 ?&gt;</code></pre>
@@ -1144,7 +1144,7 @@ exit;
       e.preventDefault();
       const alertBox = document.getElementById('contactStatusAlert');
       alertBox.className = "mb-6 p-4 rounded-lg text-sm bg-emerald-50 text-emerald-800 border border-emerald-200 block";
-      alertBox.innerHTML = '<i class="fa-solid fa-check-circle mr-1.5"></i> Thank you! Your message has been sent to <strong>plankshellandenergy@gmail.com</strong>.';
+      alertBox.innerHTML = '<i class="fa-solid fa-check-circle mr-1.5"></i> Thank you! Your message has been sent to <strong>abc@gmail.com</strong>.';
       e.target.reset();
     }
 
